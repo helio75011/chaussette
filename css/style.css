@@ -1,0 +1,288 @@
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;700&display=swap");
+
+/* || General styles */
+body {
+  background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)),
+    url("../img/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Readex Pro", sans-serif;
+  height: 100vh;
+  
+}
+
+* {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.primary-button {
+  background: linear-gradient(45deg, #fd2b75, #ff4b2b);
+  border: 0;
+  border-radius: 30px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 65px;
+  transition: 0.3s all;
+}
+
+.primary-button:hover {
+  background: linear-gradient(260deg, #fd2b75, #ff4b2b);
+}
+
+.secondary-button {
+  background: #ffffff;
+  border: 0;
+  border-radius: 30px;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 25px;
+  transition: ease-out 0.3s;
+}
+
+.secondary-button:hover {
+  background: black;
+  color: white;
+}
+
+/* ----- navbar style ------- */
+.navbar {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px 50px 40px;
+  width: 100%;
+  position: absolute;
+  transition: all 0.5s;
+}
+
+.navbar .links-navbar ul {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .links-navbar ul li {
+  margin: 0 0 0 50px;
+}
+
+a.logo {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.navbar .links-navbar ul li a {
+  color: white;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.navbar .links-navbar ul li a:hover {
+  color: #d6002f;
+  text-decoration: underline;
+}
+
+.navbar .links-navbar ul li a.secondary-button {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar .links-navbar ul li a.secondary-button:hover {
+  color: white;
+  background: black;
+  text-decoration: none;
+}
+/* ----- hamburger menu ----- */
+.menu-hamburger {
+  display: none;
+}
+
+.button-burger-menu {
+  background: white;
+  border-radius: 5px;
+  height: 5px;
+  transition: all 0.5s;
+  width: 35px;
+}
+
+.button-burger-menu::before,
+.button-burger-menu::after {
+  background-color: white;
+  border-radius: 5px;
+  content: "";
+  height: 5px;
+  position: absolute;
+  transition: all 0.5s;
+  width: 35px;
+}
+
+.button-burger-menu::before {
+  transform: translateY(-10px);
+}
+
+.button-burger-menu::after {
+  transform: translateY(10px);
+}
+
+.open .button-burger-menu {
+  background-color: transparent;
+  transform: rotate(360deg);
+}
+
+.open .button-burger-menu::before {
+  transform: rotate(45deg);
+}
+
+.open .button-burger-menu::after {
+  transform: rotate(-45deg);
+}
+
+/* ----- home style ----- */
+
+.screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home {
+  text-align: center;
+  padding: 20px;
+}
+
+.home h1 {
+  color: white;
+  font-size: 11vw;
+}
+
+.home h2 {
+  color: white;
+  font-size: 4vw;
+  margin-bottom: 20px;
+}
+
+
+
+.mobile-login {
+  background-color: transparent;
+  border-radius: 40px;
+  border: 2px solid white;
+  color: white;
+  display: none;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 12px 45px;
+  transition: all ease-out 0.3s;
+}
+
+/* ----- footer style ----- */
+footer {
+  bottom: 0;
+  color: #bcbcbc;
+  margin: 10px 20px;
+  position: fixed;
+  right: 0;
+}
+
+footer p {
+  font-size: 12px;
+}
+
+/* ----- responsive ----- */
+@media screen and (max-width: 950px) {
+  /* ------ general responsive styles -----  */
+  body {
+    background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5), rgb(0, 0, 0)),
+      url("../img/background.jpeg");
+    background-size: cover;
+  }
+
+  .primary-button {
+    background: white;
+    color: black;
+    border: 2px solid white;
+  }
+
+  .primary-button:hover {
+    color: white;
+    background: transparent;
+  }
+
+  /* ------ navbar responsive style ------  */
+  .navbar .logo {
+    font-size: 30px;
+  }
+
+  .navbar .menu-hamburger {
+    display: flex;
+    z-index: 1;
+  }
+
+  .links-navbar {
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    margin-left: -100%;
+    position: absolute;
+    top: 0;
+    transition: 0.5s;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .mobile-menu {
+    margin-left: 0;
+  }
+
+  .links-navbar ul {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar .links-navbar ul li {
+    font-size: 1.2em;
+    margin: 25px 0;
+  }
+
+  /* ------ home reponsive style -----  */
+
+  .mobile-login {
+    display: block;
+  }
+
+  .mobile-login:hover {
+    background: white;
+    color: black;
+  }
+
+  .home {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ------- footer responsive style  ------  */
+  footer {
+    color: #616874;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}
