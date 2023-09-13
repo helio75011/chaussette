@@ -1,14 +1,13 @@
 <?php
+require ('config/setting.php');
 
-require('config.php');
-session_start();
 if (isset($_POST['username']) && isset($_POST['password'])){
   $username = $_POST['username'];
   $password = $_POST['password'];
-    $query = "SELECT * FROM `users` WHERE username='$username' and password='$password'";
-  $result = mysqli_query($conn,$query);
-  $rows = mysqli_num_rows($result);
-  if($rows==1){
+  $data = $conn->prepare("SELECT * FROM `users` WHERE username='$username' and password='$password'"); 
+  $data->execute();
+  $users = $data->fetchAll(PDO::FETCH_ASSOC);
+  if(count($users)==1){
       $_SESSION['username'] = $username;
       $role = "SELECT 'role' FROM `users` WHERE username='$username' and password='$password'";
       $_SESSION['role'] = $role;

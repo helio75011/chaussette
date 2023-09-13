@@ -1,8 +1,4 @@
-<?php
-
-session_start();
-
-include 'config.php';
+<?php require('config/setting.php');
 
 if (empty($_SESSION['role']) || empty($_SESSION['username']) ) {
     header('Location: index.php');
@@ -49,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare("INSERT INTO models (marque_id, title, description, size_id, photo_path) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO models (marque_id, title, description, size_id, photo_path) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$marque_id, $title, $description, $size_id, $photoPath]);
         
         header('Location: admin.php');
@@ -59,16 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if (isset($_GET['delete_model'])) {
     $modelId = intval($_GET['delete_model']);
-    $stmt = $pdo->prepare("DELETE FROM models WHERE id = ?");
+    $stmt = $conn->prepare("DELETE FROM models WHERE id = ?");
     $stmt->execute([$modelId]);
 
     header('Location: admin.php');
     exit();
 }
 
-$marques = $pdo->query("SELECT * FROM marques")->fetchAll();
-$sizes = $pdo->query("SELECT * FROM sizes")->fetchAll();
-$modelsQuery = $pdo->query("SELECT models.*, marques.name as marque_name, sizes.size_name as size_name FROM models JOIN marques ON models.marque_id = marques.id JOIN sizes ON models.size_id = sizes.id");
+$marques = $conn->query("SELECT * FROM marques")->fetchAll();
+$sizes = $conn->query("SELECT * FROM sizes")->fetchAll();
+$modelsQuery = $conn->query("SELECT models.*, marques.name as marque_name, sizes.size_name as size_name FROM models JOIN marques ON models.marque_id = marques.id JOIN sizes ON models.size_id = sizes.id");
 $models = $modelsQuery->fetchAll();
 ?>
 

@@ -1,5 +1,5 @@
+<?php require ('config/setting.php');
 
-<?php session_start();
  if(empty($_SESSION['username'])){
     header("Location: login.php");
 }
@@ -8,32 +8,58 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site de Recettes - Page d'accueil</title>
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-    >
+  <?php include('partials/head.php')?>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Site de Recettes - Page d'accueil</title>
+  <link rel="stylesheet" href="css/card.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="container">
+    <?php include('partials/header.php')?>
+    <div class="tinder">
+      <div class="tinder--status">
+        <i class="fa fa-remove"></i>
+        <i class="fa fa-heart"></i>
+      </div>
+      <?php       
+          $data = $conn->prepare('SELECT * FROM users'); 
+          $data->execute();
+          $socks = $data->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+      <div class="tinder--cards">
+        <?php 
+          foreach ($socks as $sock): ?>
+            <div class="tinder--card overflow-auto">
 
-    <!-- Navigation -->
+            <?php /**
+              <!-- image à rajouter dans la bdd -->
+              <img src="assets/img/"<?=$sock['image']?>> 
 
-    <!-- Inclusion du formulaire de connexion -->
-        <h1>Site de Recettes !</h1>
-        <div class="user-widget">
-  <?php if( isset($_SESSION['username']) && $_SESSION['username'] !== null ) : ?>
-    <a href="logout.php">Se déconnecter</a>
-  <?php else : ?>
-    <a href="login.php">Se connecter</a>
-  <?php endif; ?>
-</div>
-        <!-- Si l'utilisateur existe, on affiche les recettes -->
-       
+            */?>
+              <h3><?= $sock['username']; ?></h3>
+              <?php if( !empty($sock['taille']) ) : ?>
+                <p><?=$sock['taille'];?></p>
+              <?php endif ?>
+              <?php if( !empty($sock['couleur']) ) : ?>
+                <p><?=$sock['couleur'];?></p>
+              <?php endif ?>
+              <?php if( !empty($sock['marque']) ) : ?>
+                <p><?=$sock['marque'];?></p>
+              <?php endif ?>
+            </div>
+          <?php endforeach;?>
+      </div>
+
+      <div class="tinder--buttons">
+        <button id="nope"><i class="fa fa-remove"></i></button>
+        <button id="love"><i class="fa fa-heart"></i></button>
+      </div>
     </div>
+
+    <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
+    <script  src="js/card.js"></script>
 
 </body>
 </html>

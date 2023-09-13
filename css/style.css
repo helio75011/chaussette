@@ -54,6 +54,9 @@ a {
 }
 
 /* ----- navbar style ------- */
+header{
+  height: fit-content;
+}
 .navbar {
   align-items: center;
   box-sizing: border-box;
@@ -63,6 +66,7 @@ a {
   width: 100%;
   position: absolute;
   transition: all 0.5s;
+  z-index: 4;
 }
 
 .navbar .links-navbar ul {

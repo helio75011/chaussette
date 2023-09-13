@@ -1,4 +1,4 @@
-<?php session_start();
+<?php require('config/setting.php');
  if(isset($_SESSION['username'])){
     header("Location: connected.php");
 }
@@ -14,6 +14,11 @@ else{
   <link rel="stylesheet" href="css/style.css" />
   <link rel="shortcut icon" href="img/favicon.png" />
   <title>Chaussette | retrouvé votre paire </title>
+  <style>
+    .navbar{
+      position: absolute;
+    }
+  </style>
 </head>
 
 <body>
