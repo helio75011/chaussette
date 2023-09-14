@@ -49,7 +49,7 @@ if (!empty($_POST) && isset($name) && isset($email) && isset($password)) {
             }
 
             $uploadedFile = $_FILES['visuel'];
-            $fileName = uniqid() . '_' . $_FILES['visuel']['name'] . '.' . pathinfo($uploadedFile['name'], PATHINFO_EXTENSION);
+            $fileName = uniqid() . '_' . $_FILES['visuel']['name'];
             
             // Déplacement du fichier téléchargé
             $uploadDir = 'images/';
