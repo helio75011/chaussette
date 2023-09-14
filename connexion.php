@@ -11,6 +11,8 @@ if (isset($_POST['username']) && isset($_POST['password'])){
       $_SESSION['username'] = $username;
       $role = "SELECT 'role' FROM `users` WHERE username='$username' and password='$password'";
       $_SESSION['role'] = $role;
+      $_SESSION['taille'] = $taille;
+      
       if($_SESSION == 'admin'){
         header("Location: admin.php");
       }else{
