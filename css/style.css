@@ -290,3 +290,16 @@ footer p {
     text-align: center;
   }
 }
+
+
+
+
+
+::-webkit-scrollbar {
+  width: 7px;
+  background: #fe3175;
+}
+::-webkit-scrollbar-thumb {
+  border: solid 0 transparent;
+  background-color: #ffffff;
+}

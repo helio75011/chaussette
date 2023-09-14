@@ -4,3 +4,4 @@
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/style.css" />
 <link rel="shortcut icon" href="img/favicon.png" />
+<link rel="stylesheet" href="css/all.min.css">

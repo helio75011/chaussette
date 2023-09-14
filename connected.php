@@ -13,7 +13,7 @@ else{
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Site de Recettes - Page d'accueil</title>
   <link rel="stylesheet" href="css/card.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -38,16 +38,27 @@ else{
               <img src="assets/img/"<?=$sock['image']?>> 
 
             */?>
+            <p class="compatible">Compatible</p>
+            <figure>
+              <img src="img/heel-tread-chaussettes-brahbam-bt49.png" alt="">
+            </figure>
               <h3><?= $sock['username']; ?></h3>
-              <?php if( !empty($sock['taille']) ) : ?>
-                <p><?=$sock['taille'];?></p>
+              <?php if(!empty($sock['taille']) || !empty($sock['couleur']) || !empty($sock['marque'])): ?>
+              <div class="info">
+                <?php if( !empty($sock['taille']) ) : ?>
+                  <p><i class="fa-solid fa-ruler"></i><?=$sock['taille'];?></p>
+                <?php endif ?>
+                <?php if( !empty($sock['couleur']) ) : ?>
+                  <p class="color"><?=$sock['couleur'];?></p>
+                <?php endif ?>
+                <?php if( !empty($sock['marque']) ) : ?>
+                  <p><?=$sock['marque'];?></p>
+                <?php endif ?>
+              </div>
+              <?php if( !empty($sock['description']) ) : ?>
+                <p class="description"><?=$sock['description'];?></p>
               <?php endif ?>
-              <?php if( !empty($sock['couleur']) ) : ?>
-                <p><?=$sock['couleur'];?></p>
-              <?php endif ?>
-              <?php if( !empty($sock['marque']) ) : ?>
-                <p><?=$sock['marque'];?></p>
-              <?php endif ?>
+              <?php endif?>
             </div>
           <?php endforeach;?>
       </div>
