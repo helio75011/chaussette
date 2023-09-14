@@ -17,31 +17,30 @@ else{
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <?php include('partials/header.php')?>
+    <?php include('partials/header.php');?>
     <div class="tinder">
       <div class="tinder--status">
         <i class="fa fa-remove"></i>
         <i class="fa fa-heart"></i>
       </div>
       <?php       
-          $data = $conn->prepare('SELECT * FROM users'); 
+        // var_dump("SELECT * FROM users WHERE username NOT IN 'test'");
+          $data = $conn->prepare("SELECT * FROM users WHERE NOT username='$_SESSION['username']'"); 
           $data->execute();
           $socks = $data->fetchAll(PDO::FETCH_ASSOC);
-        ?>
+      ?>
       <div class="tinder--cards">
         <?php 
-          foreach ($socks as $sock): ?>
-            <div class="tinder--card overflow-auto">
-
-            <?php /**
-              <!-- image à rajouter dans la bdd -->
-              <img src="assets/img/"<?=$sock['image']?>> 
-
-            */?>
+        foreach ($socks as $sock): 
+          $is_compatible = $sock['taille'] == $current_user['taille'] && $sock['couleur'] == $current_user['couleur'] && $sock['marque'] == $current_user['marque']; 
+        ?>
+          <div class="tinder--card overflow-auto">
+            <?php if($is_compatible): ?>
             <p class="compatible">Compatible</p>
-            <figure>
-              <img src="img/heel-tread-chaussettes-brahbam-bt49.png" alt="">
-            </figure>
+            <?php endif; ?>
+              <figure>
+                <img src=<?=$sock['image']?> alt="">
+              </figure>
               <h3><?= $sock['username']; ?></h3>
               <?php if(!empty($sock['taille']) || !empty($sock['couleur']) || !empty($sock['marque'])): ?>
               <div class="info">
@@ -59,8 +58,8 @@ else{
                 <p class="description"><?=$sock['description'];?></p>
               <?php endif ?>
               <?php endif?>
-            </div>
-          <?php endforeach;?>
+          </div>
+        <?php endforeach;?>
       </div>
 
       <div class="tinder--buttons">
