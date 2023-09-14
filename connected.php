@@ -31,12 +31,14 @@ else{
       <div class="tinder--cards">
         <?php 
         foreach ($socks as $sock): ?>
-          <div class="tinder--card overflow-auto">
+        
+        <div class="tinder--card overflow-auto" ID_M="<?= $sock['username']; ?>">
+        
               <figure>
                 <img src=<?=$sock['image']?> alt="">
               </figure>
               <h3><?= $sock['username']; ?></h3>
-              <?php if(!empty($sock['taille']) || !empty($sock['couleur']) || !empty($sock['marque'])): ?>
+              <?php var_dump($_SESSION['match']) ; if(!empty($sock['taille']) || !empty($sock['couleur']) || !empty($sock['marque'])): ?>
               <div class="info">
                 <?php if( !empty($sock['taille']) ) : ?>
                   <p><i class="fa-solid fa-ruler"></i><?=$sock['taille'];?></p>
