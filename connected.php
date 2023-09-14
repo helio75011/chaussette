@@ -52,7 +52,7 @@ else{
         
         <div class="tinder--card overflow-auto" ID_M="<?= $sock['username']; ?>">
               <figure>
-                <img src=<?=$sock['image']?> alt="">
+                <img src=<?=$sock['image']?> alt="#">
               </figure>
               <h3><?= $sock['username']; ?></h3>
               <?php if(!empty($sock['taille']) || !empty($sock['couleur']) || !empty($sock['marque'])): ?>

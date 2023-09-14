@@ -57,12 +57,21 @@ if (!empty($_POST) && isset($name) && isset($email) && isset($password)) {
             move_uploaded_file($uploadedFile['tmp_name'], $uploadFile);
             $fileName = 'images/' . $fileName;
             
-
-
-            $conn->query("INSERT INTO `users` (`username`, `password`, `email`, `couleur`, `marque`, `taille`, `image`, `description`) VALUES ('$name', '$password', '$email', '$couleur', '$marque', '$taille', '$fileName', '$description')");
-            $_SESSION['username'] = $name;
+	//on cree une requete d'insertion dans la base
+	$insert = $conn->prepare('INSERT INTO users (username, password, email, couleur, marque, taille, image, description) VALUES (:u, :p, :e, :c, :m, :t, :i, :d) ');
+	$insert->execute([
+		':u' => $_POST['name'],
+		':p' => $_POST['password'],
+		':e' => $_POST['email'],
+		':c' => $_POST['couleur'],
+		':m' => $_POST['marque'],
+		':t' => $_POST['taille'],
+		':i' => $fileName,
+		':d' => $_POST['description']
+	]);
+         $_SESSION['username'] = $name;
             header("Location: connected.php");
-        }
+}
     }
 
 
