@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php require('config/setting.php');
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
