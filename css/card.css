@@ -176,16 +176,6 @@
     color: #CDD6DD;
   }
 
-.color::before{
-  content: "";
-  height: 15px;
-  width: 15px;
-  background-color: red;
-  display: inline-block;
-  border-radius: 10px;
-  vertical-align: middle;
-  margin-right: 5px;
-}
 
 
 ::-webkit-scrollbar {

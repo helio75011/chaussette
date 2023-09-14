@@ -24,20 +24,14 @@ else{
         <i class="fa fa-heart"></i>
       </div>
       <?php       
-        // var_dump("SELECT * FROM users WHERE username NOT IN 'test'");
-          $data = $conn->prepare("SELECT * FROM users WHERE NOT username='$_SESSION['username']'"); 
-          $data->execute();
+          $data = $conn->prepare("SELECT * FROM users WHERE NOT username = :i"); 
+          $data->execute([':i' => $_SESSION['username']]);
           $socks = $data->fetchAll(PDO::FETCH_ASSOC);
       ?>
       <div class="tinder--cards">
         <?php 
-        foreach ($socks as $sock): 
-          $is_compatible = $sock['taille'] == $current_user['taille'] && $sock['couleur'] == $current_user['couleur'] && $sock['marque'] == $current_user['marque']; 
-        ?>
+        foreach ($socks as $sock): ?>
           <div class="tinder--card overflow-auto">
-            <?php if($is_compatible): ?>
-            <p class="compatible">Compatible</p>
-            <?php endif; ?>
               <figure>
                 <img src=<?=$sock['image']?> alt="">
               </figure>
