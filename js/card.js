@@ -53,29 +53,7 @@ allCards.forEach(function (el) {
     if (keep) {
       event.target.style.transform = '';
     } else {
-// La carte a été glissée suffisamment pour être supprimée
-    // Vous pouvez ajouter votre requête AJAX ici
-    if (event.deltaX > 0) {
-      // La carte a été glissée à droite
-      var card = event.target;
-      var ID_M = card.getAttribute('ID_M'); // Récupérer l'ID_M de la carte
-      // console.log('ID_M à envoyer via AJAX :', ID_M);
 
-      // Envoi de l'ID_M au fichier PHP via une requête AJAX
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'like.php', true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onreadystatechange = function () {
-        // if (xhr.readyState === 4 && xhr.status === 200) {
-        //   // La réponse du serveur (si nécessaire)
-        //   console.log(xhr.responseText);
-        // }
-      };
-
-      // Préparez les données à envoyer, par exemple en tant que paramètre POST
-      var dataToSend = 'ID_M=' + ID_M;
-      xhr.send(dataToSend);
-    }
       // Transformation de la carte
       var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
       var toX = event.deltaX > 0 ? endX : -endX;
@@ -87,6 +65,40 @@ allCards.forEach(function (el) {
 
       event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
       initCards();
+      // La carte a été glissée suffisamment pour être supprimée
+    // Vous pouvez ajouter votre requête AJAX ici
+    if (event.deltaX > 0) {
+      // La carte a été glissée à droite
+      var card = event.target;
+      var ID_M = card.getAttribute('ID_M'); // Récupérer l'ID_M de la carte
+      // console.log('ID_M à envoyer via AJAX :', ID_M);
+
+      // Envoi de l'ID_M au fichier PHP via une requête AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'like.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+     
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          if (response.match) {
+            // C'est un match, affichez un popup SweetAlert2
+            Swal.fire({
+              title: 'MATCH',
+              text: 'Vous avez trouvé un match !',
+              icon: 'success', // Vous pouvez choisir une icône appropriée
+              confirmButtonText: 'OK',
+            });
+          }
+        }
+      };
+      
+
+
+      // Préparez les données à envoyer, par exemple en tant que paramètre POST
+      var dataToSend = 'ID_M=' + ID_M;
+      xhr.send(dataToSend);
+    }
     }
   });
 });
@@ -106,20 +118,27 @@ function createButtonListener(love) {
     if (love) {
       card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
 
-
       // Envoi de l'ID_M au fichier PHP via une requête AJAX
       var xhr = new XMLHttpRequest();
       xhr.open('POST', 'like.php', true);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr.onreadystatechange = function () {
-        // if (xhr.readyState === 4 && xhr.status === 200) {
-        //   // La réponse du serveur (si nécessaire)
-        //   // console.log(xhr.responseText);
-        // }
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // La réponse du serveur (si nécessaire)
+          console.log(xhr.responseText);
+          var response = JSON.parse(xhr.responseText);
+          if (response.match) {
+            // C'est un match, affichez un popup SweetAlert2
+            Swal.fire({
+              title: 'MATCH',
+              text: 'Vous avez trouvé un match !',
+              icon: 'success', // Vous pouvez choisir une icône appropriée
+              confirmButtonText: 'OK',
+            });
+          }
+        }
       };
-      xhr.send('ID_M=' + ID_M); 
-
-
+      xhr.send('ID_M=' + ID_M);
     } else {
       card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
     }
@@ -129,7 +148,6 @@ function createButtonListener(love) {
     event.preventDefault();
   };
 }
-
 var nopeListener = createButtonListener(false);
 var loveListener = createButtonListener(true);
 
