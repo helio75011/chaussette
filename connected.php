@@ -11,7 +11,7 @@ else{
   <?php include('partials/head.php')?>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Site de Recettes - Page d'accueil</title>
+  <title>Chaussette | retrouvé votre paire </title>
   <link rel="stylesheet" href="css/card.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
@@ -26,16 +26,31 @@ else{
         <i class="fa fa-heart"></i>
       </div>
       <?php
-          $data = $conn->prepare("SELECT * FROM users WHERE NOT username = :i");        
-          $data->execute([':i' => $_SESSION['username']]);
+
+
+
+      $username = $_SESSION['username'];
+      $couleurs = $conn->prepare("SELECT `couleur`, `marque`, `taille` FROM `users` WHERE `username` LIKE '$username'");
+      $couleurs->execute();
+      $resultat = $couleurs->fetch(PDO::FETCH_ASSOC); // Récupérez la première ligne du résultat
+      $couleur = $resultat['couleur']; // Stockez la couleur dans la variable $couleur
+      $marque = $resultat['marque'];
+      $taille = $resultat['taille'];
+          $data = $conn->prepare("SELECT * FROM `users` WHERE `couleur` LIKE '$couleur' AND `marque` LIKE '$marque' AND `taille` LIKE '$taille' AND NOT username = '$username'");        
+          $data->execute();
           $socks = $data->fetchAll(PDO::FETCH_ASSOC);
       ?>
       <div class="tinder--cards">
         <?php 
-        foreach ($socks as $sock): ?>
+        foreach ($socks as $sock):
+          $ID_M = $sock['username'];
+          $id_u = $conn->prepare("SELECT * FROM `paire` WHERE `ID_U` LIKE '$username' AND `ID_M` LIKE '$ID_M'"); 
+          $id_u->execute();
+          $id_us = $id_u->fetchAll(PDO::FETCH_ASSOC);
+          if(count($id_us)==0){
+          ?>
         
         <div class="tinder--card overflow-auto" ID_M="<?= $sock['username']; ?>">
-        
               <figure>
                 <img src=<?=$sock['image']?> alt="">
               </figure>
@@ -57,12 +72,14 @@ else{
               <?php endif ?>
               <?php endif?>
           </div>
-        <?php endforeach;?>
+          
+        <?php } endforeach;?>
       </div>
 
       <div class="tinder--buttons">
         <button id="nope"><i class="fa fa-remove"></i></button>
         <button id="love"><i class="fa fa-heart"></i></button>
+
       </div>
     </div>
 
