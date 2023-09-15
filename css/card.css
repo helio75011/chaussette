@@ -105,6 +105,7 @@
   }
 
   .tinder--card .description{
+    text-transform: none;
     text-align: start;
     font-size: 15px !important;
 }

@@ -27,6 +27,7 @@ body {
 a {
   -webkit-tap-highlight-color: transparent;
 }
+
 .screen {
   width: 100vw;
   height: 100vh;
@@ -43,10 +44,10 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80%;
+  height: 83%;
   width: 70%;
   padding: 20px 0;
-  margin-top: 6%;
+  margin-top: 5%;
 }
 
 .form-content {
@@ -58,6 +59,7 @@ a {
   height: 95%;
     width: 95%;
 }
+
 .form-content h2 {
   color: white;
   font-size: 55px;
@@ -231,4 +233,38 @@ input:focus {
     width: 100%;
     border-radius: inherit;
   }
+}
+
+
+.card--match{
+  display: flex;
+  width: 80%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-top: 20px;
+  max-height: 150px;
+}
+
+.card--match figure{
+  width: 30%;
+  margin-right: 10px;
+}
+
+.card--match img{
+  width: 100%;
+  border-radius: 8px;
+  max-height: 100%;
+  object-fit: cover;
+}
+.card--match h4{
+  color: #ff6f63;
+}
+.card--match li {
+  text-align: start;
+}
+
+#container--match{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
 }
