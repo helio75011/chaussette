@@ -47,7 +47,8 @@ else{
           $id_u = $conn->prepare("SELECT * FROM `paire` WHERE `ID_U` LIKE '$username' AND `ID_M` LIKE '$ID_M'"); 
           $id_u->execute();
           $id_us = $id_u->fetchAll(PDO::FETCH_ASSOC);
-          if(count($id_us)==0){
+          // rajout !
+          if(count($id_us)!==0){
           ?>
         
         <div class="tinder--card overflow-auto" ID_M="<?= $sock['username']; ?>">

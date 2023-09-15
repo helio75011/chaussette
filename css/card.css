@@ -188,4 +188,34 @@
   background: #d1d1d1;
 }
 
+
+.swal2-popup.swal2-modal.swal2-icon-success.swal2-show, .swal2-success-circular-line-left, .swal2-success-circular-line-right, .swal2-success-fix{
+
+  background: linear-gradient(45deg, #fd2b75, #ff4b2b) !important;
+}
+
+.swal2-success-ring{
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.swal2-success-line-long, .swal2-success-line-tip{
+  background-color: #fff !important;
+}
+
+.swal2-confirm.swal2-styled{
+  background-color: transparent;
+  border: solid 2px #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0) !important;
+}
+
+.swal2-title{
+  color: #fff;
+}
+
+.swal2-html-container{
+  color: #fff !important;
+}
+
+
   
