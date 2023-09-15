@@ -48,7 +48,7 @@ else{
           $id_u->execute();
           $id_us = $id_u->fetchAll(PDO::FETCH_ASSOC);
           // rajout !
-          if(count($id_us)!==0){
+          if(count($id_us)==0){
           ?>
         
         <div class="tinder--card overflow-auto" ID_M="<?= $sock['username']; ?>">
