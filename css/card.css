@@ -84,6 +84,13 @@
     overflow-y: scroll;
   }
 
+  figure{
+    pointer-events: none;
+  }
+
+  .info{
+    pointer-events: none;
+  }
 
   
   .moving.tinder--card {
