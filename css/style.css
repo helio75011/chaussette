@@ -208,12 +208,6 @@ footer p {
 /* ----- responsive ----- */
 @media screen and (max-width: 950px) {
   /* ------ general responsive styles -----  */
-  body {
-    background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5), rgb(0, 0, 0)),
-      url("../img/background.jpeg");
-    background-size: cover;
-  }
-
   .primary-button {
     background: white;
     color: black;
@@ -237,8 +231,6 @@ footer p {
 
   .links-navbar {
     align-items: center;
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.5);
     display: flex;
     height: 100vh;
     justify-content: center;
