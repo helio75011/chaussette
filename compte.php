@@ -178,6 +178,27 @@ if (empty($_SESSION['username'])) {
         </form>
 
 
+        <?php
+        function delete_account($username)
+              {
+                global $conn;
+                $suppression = $conn->prepare("DELETE FROM users WHERE username = :username");
+                $suppression->bindParam(':username', $username, PDO::PARAM_STR);
+                $suppression->execute();
+              }
+              if (isset($_GET['action']) && $_GET['action'] == 'quitter' && !empty($_GET['username'])) {
+                print_r($_GET['username']);
+                delete_account($_GET['username']);
+                session_destroy();
+                $_SESSION['message'] = '<div class="alert alert-success">L\'user n°' . $_GET['username'] . ' a bien été supprimé.</div>';
+                header('location: login.php');
+              }
+
+
+              ?>
+
+              <a id="rouge" href="login.php?action=quitter&username=<?php echo $_SESSION['username']; ?>" onclick="return(confirm(' êtes vous sûr ?'))">Supprimer mon compte</a>
+
        
       </div>
     </div>

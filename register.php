@@ -51,10 +51,7 @@ require('config/setting.php');
             <input  type="file" class="form-control" id="visuel" name="visuel" required />
           </div>
 
-     
-           
           
-
           <h4>Couleur :</h4>
           <div class="hobbies radio" id="couleurContainer">
             <?php
