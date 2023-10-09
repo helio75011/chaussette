@@ -36,6 +36,15 @@ a {
   justify-content: center;
 }
 
+#croix {
+  position: absolute;
+  top: 100px;
+  left: 400px;
+  font-weight: bolder;
+  fill: white;
+  font-size: 30px;
+}
+
 .form-container {
   background: linear-gradient(90deg, #fe3175, #ff6f63);
   border-radius: 10px;

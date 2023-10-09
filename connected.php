@@ -41,10 +41,15 @@ else{
           $socks = $data->fetchAll(PDO::FETCH_ASSOC);
       ?>
       <div class="tinder--cards">
-        <?php 
+        <?php
+
         foreach ($socks as $sock):
-          $ID_M = $sock['username'];
-          $id_u = $conn->prepare("SELECT * FROM `paire` WHERE `ID_U` LIKE '$username' AND `ID_M` LIKE '$ID_M'"); 
+            if (!empty($socks) ) {
+                echo('vide');
+            }
+
+            $ID_M = $sock['username'];
+          $id_u = $conn->prepare("SELECT * FROM `paire` WHERE `ID_U` LIKE '$username' AND `ID_M` LIKE '$ID_M'");
           $id_u->execute();
           $id_us = $id_u->fetchAll(PDO::FETCH_ASSOC);
           // rajout !
