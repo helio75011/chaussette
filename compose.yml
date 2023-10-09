@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: b3_tinder_chaussette
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_ROOT_PASSWORD: 'examplepass'
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./src:/var/www/html" # sync the current dir on local machine to the dir of container
+    ports:
+      - 80:80
